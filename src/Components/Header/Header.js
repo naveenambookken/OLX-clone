@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React,{useContext, useState} from 'react';
 import {useHistory} from 'react-router-dom'
 import './Header.css';
 import OlxLogo from '../../assets/OlxLogo';
@@ -7,10 +7,15 @@ import Arrow from '../../assets/Arrow';
 import SellButton from '../../assets/SellButton';
 import SellButtonPlus from '../../assets/SellButtonPlus';
 import { AuthContext, FirebaseContext } from '../../store/Context';
-function Header() {
+import ChatIcon from '../../assets/ChatIcon'
+import NotificationBellIcon from '../../assets/NotificationBellIcon';
+
+
+function Header({userOpen,setUserOpen,toggling}) {
   const history = useHistory()
   const {user} = useContext(AuthContext)
   const {firebase} = useContext(FirebaseContext)
+  
   return (
     <div className="headerParentDiv">
       <div className="headerChildDiv">
@@ -37,11 +42,23 @@ function Header() {
           <span> ENGLISH </span>
           <Arrow></Arrow>
         </div>
-        <div className="loginPage">
+        <div className="chaticonspallet">
+        <ChatIcon></ChatIcon>
+        <NotificationBellIcon></NotificationBellIcon>
+        </div>
+        <div className="userDetails" onClick={()=>setUserOpen(true)} >  
+        <img src="Images/avatar.png" alt=""/>
+        <Arrow ></Arrow>
+        </div>
+        
+        
+        {userOpen && <div onClick={toggling} className="UserPane">
           <span>{user ? `Welcome ${user.displayName}` : <div onClick={()=>history.push('/login')}>Login</div>}</span>
           <hr />
-        </div>
-              {user && <span onClick={()=>{
+        </div>}
+
+
+        {user && <span onClick={()=>{
                 firebase.auth().signOut();
                 history.push('/login')
               }} >Logout</span>}

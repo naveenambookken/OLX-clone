@@ -93,6 +93,15 @@
   font-weight: bolder;
   margin-right: 5px;
 }
+.chaticonspallet{
+  display: flex;
+  align-items: center;
+}
+
+.userDetails img{
+  width: 35px;
+  height: 35px;
+}
 
 .language svg {
 }
@@ -105,14 +114,23 @@
   font-weight: bolder;
   margin-right: 5px;
 }
+.UserPane{
+  right: 32px;
+  top: 52px;
+  width: 288px;
+  position: absolute;
+  background: #fff;
+  box-shadow: 0 0 6px 0 rgb(0 0 0 / 12%), 0 6px 6px 0 rgb(0 0 0 / 24%);
+  border-radius: 4px;
+}
 
-.loginPage hr {
+.UserPane hr {
   margin: 0;
   background-color: black;
   height: 2px;
 }
 
-.loginPage a{
+.UserPane a{
   text-decoration: none;
 }
 
