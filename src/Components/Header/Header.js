@@ -11,11 +11,11 @@ import ChatIcon from '../../assets/ChatIcon'
 import NotificationBellIcon from '../../assets/NotificationBellIcon';
 
 
-function Header({userOpen,setUserOpen,toggling}) {
+function Header() {
   const history = useHistory()
   const {user} = useContext(AuthContext)
   const {firebase} = useContext(FirebaseContext)
-  
+  const [userOpen, setUserOpen] = useState(false)
   return (
     <div className="headerParentDiv">
       <div className="headerChildDiv">
@@ -46,22 +46,24 @@ function Header({userOpen,setUserOpen,toggling}) {
         <ChatIcon></ChatIcon>
         <NotificationBellIcon></NotificationBellIcon>
         </div>
-        <div className="userDetails" onClick={()=>setUserOpen(true)} >  
+        <div className="userDetails" onClick={()=>setUserOpen(!userOpen)} >  
         <img src="Images/avatar.png" alt=""/>
         <Arrow ></Arrow>
         </div>
         
         
-        {userOpen && <div onClick={toggling} className="UserPane">
+        {userOpen && <div className="UserPane">
+        <img src="Images/avatar.png" alt=""/>
           <span>{user ? `Welcome ${user.displayName}` : <div onClick={()=>history.push('/login')}>Login</div>}</span>
           <hr />
-        </div>}
-
 
         {user && <span onClick={()=>{
                 firebase.auth().signOut();
                 history.push('/login')
               }} >Logout</span>}
+        </div>}
+
+
         <div onClick={()=>{
               history.push('/create')
             }} className="sellMenu">
