@@ -8,6 +8,7 @@ import ViewPost from './Pages/ViewPost'
 import {BrowserRouter as Router,Route} from 'react-router-dom';
 import { AuthContext, FirebaseContext } from './store/Context';
 import Post from './store/PostContext'
+import Myads from './Pages/Myads';
 
 function App() {
   const {setUser} = useContext(AuthContext)
@@ -35,6 +36,9 @@ function App() {
         </Route>
         <Route path='/view'>
           <ViewPost/>
+        </Route>
+        <Route path='/myads'>
+          <Myads/>
         </Route>
       </Router>
       </Post>
