@@ -1,0 +1,50 @@
+.myadsEmptyState{
+    margin: 16px auto;
+}
+.emptyState{
+    width: 233px;
+    height: 380px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.emptyState img{
+    width: 200px;
+    height: 200px;
+}
+.emptyState .title{
+    margin: 0 0 16px;
+    font-size: 16px;
+    line-height: 24px;
+    color: rgba(0,47,52,.64);
+    font-weight: 700;
+}
+.emptyState .subtitle{
+    margin: 0 0 16px;
+    font-size: 14px;
+    line-height: 20px;
+    width: 60%;
+    color: rgba(0,47,52,.36);
+}
+.emptyStateBtn{
+    color: #002f34;
+    border: none;
+    background-color: white;
+    padding: 0 10px;
+    font-size: 16px;
+    font-weight: bold;
+    height: 35px;
+   
+}
+.emptyState div{
+    border-radius: 4px;
+    padding: 3px 3px;
+    display: inline-block;
+    border: 2px solid #002f34;
+}
+.emptyState div:hover{
+background-color: #002f34 ;
+}

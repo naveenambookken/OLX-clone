@@ -18,7 +18,7 @@ function Header() {
   return (
     <div className="headerParentDiv">
       <div className="headerChildDiv">
-        <div className="brandName">
+        <div onClick={()=>history.push('/')} className="brandName">
           <OlxLogo></OlxLogo>
         </div>
         <div className="placeSearch">
@@ -41,14 +41,15 @@ function Header() {
           <span> ENGLISH </span>
           <Arrow></Arrow>
         </div>
-        <div className="chaticonspallet">
+        {user && <div className="chaticonspallet">
           <div className="circle">
           <ChatIcon></ChatIcon>
           </div>
           <div className="circle">
           <NotificationBellIcon></NotificationBellIcon>
           </div>
-        </div>
+        </div>}
+        {!user && <div className="loginBtn" onClick={() =>history.push('/login') }>Login</div>}
         {user && <div className="userDetails" onClick={() => setUserOpen(!userOpen)}>
           <img src="Images/avatar.png" alt="" />
           <Arrow></Arrow>
@@ -61,10 +62,8 @@ function Header() {
                 <div className="profile-titles">
                   <span className="title1">Hello,</span>
                   <span className="title2">
-                    {user ? (
+                    {user && (
                       ` ${user.displayName}`
-                    ) : (
-                      <div onClick={() => {}}>Login</div>
                     )}
                   </span>
                   <span className="title3">View and edit profile</span>

@@ -46,7 +46,7 @@ const Create = () => {
                 setName(e.target.value)
               }}
               name="Name"
-              defaultValue="John"
+              
             />
             <br />
             <label htmlFor="fname">Category</label>
@@ -60,7 +60,7 @@ const Create = () => {
                 setCategory(e.target.value)
               }}
               name="category"
-              defaultValue="John"
+              
             />
             <br />
             <label htmlFor="fname">Price</label>

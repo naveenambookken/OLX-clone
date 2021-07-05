@@ -9,7 +9,7 @@ function Posts() {
   const history = useHistory();
   const { firebase } = useContext(FirebaseContext);
   const [products, setProducts] = useState([]);
-  const {setPostDetails} = useContext(PostContext)
+  const { setPostDetails } = useContext(PostContext);
 
   useEffect(() => {
     firebase
@@ -36,10 +36,13 @@ function Posts() {
         <div className="cards">
           {products.map((product) => {
             return (
-              <div 
-              onClick={()=>{setPostDetails(product)
-                history.push('/view')}}
-              className="card">
+              <div
+                onClick={() => {
+                  setPostDetails(product);
+                  history.push("/view");
+                }}
+                className="card"
+              >
                 <div className="favorite">
                   <Heart></Heart>
                 </div>
