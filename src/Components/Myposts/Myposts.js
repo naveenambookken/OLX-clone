@@ -6,9 +6,6 @@ import MyfavPosts from "./MyfavPosts";
 function Myposts() {
   const [isadsSelected, setIsadsSelected] = useState(true);
   const [isfavSelected, setIsfavSelected] = useState(false);
-  const mystyle = {
-    borderBottom: " 5px solid rgb(0, 47, 52)",
-  };
   return (
     <div className="mypostParentDiv">
       <div className="heading-navbar">

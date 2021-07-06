@@ -3,15 +3,20 @@ import Logo from '../../olx-logo.png';
 import './Signup.css';
 import {FirebaseContext } from '../../store/Context'
 import { useHistory } from 'react-router-dom';
+import Loader from '../../Components/Loader/Loader'
 export default function Signup() {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
+  const [pswd, setPswd] = useState('')
+  const [pswd1, setPswd1] = useState('')
   const [password, setPassword] = useState('')
   const {firebase} = useContext(FirebaseContext)
+  const [isLoading, setIsLoading] = useState(false)
   const history = useHistory()
   const handleSubmit=(e)=>{
     e.preventDefault()
+    setIsLoading(true)
     firebase.auth().createUserWithEmailAndPassword(email,password).then((result)=>{
       result.user.updateProfile({displayName:username}).then(()=>{
         firebase.firestore().collection('user').add({
@@ -19,14 +24,21 @@ export default function Signup() {
           username:username,
           phone:phone
         }).then(()=>{
+          setIsLoading(false) 
           history.push("/login")
         })
       })
       
-    })
+    }).catch((error) => {
+      setIsLoading(false)
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      alert(errorMessage)
+    });
   }
   return (
     <div>
+      {isLoading && <Loader/>}
       <div className="signupParentDiv">
         <img width="200px" height="200px" src={Logo}></img>
         <form onSubmit={handleSubmit}>
@@ -39,7 +51,7 @@ export default function Signup() {
             onChange={(e)=>setUsername(e.target.value)}
             id="fname"
             name="name"
-            defaultValue="John"
+            placeholder="Type your username"
           />
           <br />
           <label htmlFor="fname">Email</label>
@@ -51,7 +63,7 @@ export default function Signup() {
             onChange={(e)=>setEmail(e.target.value)}
             id="fname"
             name="email"
-            defaultValue="John"
+            placeholder="type your Email"
           />
           <br />
           <label htmlFor="lname">Phone</label>
@@ -63,7 +75,7 @@ export default function Signup() {
             onChange={(e)=>setPhone(e.target.value)}
             id="lname"
             name="phone"
-            defaultValue="Doe"
+            placeholder="Type your Phone"
           />
           <br />
           <label htmlFor="lname">Password</label>
@@ -72,14 +84,24 @@ export default function Signup() {
             className="input"
             type="password"
             id="lname"
-            value={password}
-            onChange={(e)=>setPassword(e.target.value)}
+            value={pswd}
+            onChange={(e)=>setPswd(e.target.value)}
             name="password"
-            defaultValue="Doe"
+            placeholder="Set your Password"
+          />
+          <br/>
+          <input
+            className="input"
+            type="password"
+            id="lname"
+            value={pswd1}
+            onChange={(e)=>setPswd1(e.target.value)}
+            name="password"
+            placeholder="Confirm your Password"
           />
           <br />
           <br />
-          <button>Signup</button>
+          <button onClick={()=>pswd===pswd1 ? setPassword(pswd1): alert('Password did not match')}>Signup</button>
         </form>
         <a onClick={()=>history.push('/login')}>Login</a>
       </div>

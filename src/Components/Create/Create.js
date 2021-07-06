@@ -3,6 +3,7 @@ import './Create.css';
 import Header from '../Header/Header';
 import { AuthContext, FirebaseContext } from '../../store/Context'
 import { useHistory } from 'react-router-dom';
+import Loader from '../../Components/Loader/Loader'
 
 
 const Create = () => {
@@ -10,11 +11,13 @@ const Create = () => {
   const {user} = useContext(AuthContext)
   const [name, setName] = useState()
   const [category, setCategory] = useState()
+  const [isLoading, setIsLoading] = useState(false)
   const [price, setPrice] = useState()
   const [image, setImage] = useState(null)
   const date = new Date()
   const history = useHistory()
   const handleSubmit =()=>{
+    setIsLoading(true)
      firebase.storage().ref(`/image/${image.name}`).put(image).then(({ref})=>{
       ref.getDownloadURL().then((url)=>{
         console.log(url);
@@ -25,13 +28,25 @@ const Create = () => {
           url,
           userId:user.uid,
           createdAt:date.toDateString()
-        })
-        history.push('/')
+        }).then(() => {
+          console.log("Document successfully updated!");
+          setIsLoading(false)
+          history.push('/')
+      }).catch((error) => {
+        setIsLoading(false)
+        // The document probably doesn't exist.
+        alert("Error updating document: ", error);
+    });
+       
+      }).catch((error)=>{
+        setIsLoading(false)
+        alert("Error updating document: ", error);
       })
     })
   }
   return (
     <Fragment>
+      {isLoading && <Loader/>}
       <Header />
       <card>
         <div className="centerDiv">

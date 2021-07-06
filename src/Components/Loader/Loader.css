@@ -4,16 +4,18 @@
 	height: 100vh;
 	display: flex;
 	align-items: center;
-	justify-content: center;	
+	justify-content: center;
+	position: fixed;
+	z-index: 2999;	
 }
 .loader-1{
 	width: 60px;
 	height:60px;
 	border-radius: 50%;
-	border-left: 3px solid #b69292;
-	border-top: 3px solid rgba(255, 255, 255, 0.2);
-	border-right: 3px solid rgba(255, 255, 255, 0.2);
-	border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+	border-left: 5px solid #64ebf5;
+	border-top: 5px solid rgba(90, 175, 255, 0.2);
+	border-right: 5px solid rgba(90, 175, 255, 0.2);
+	border-bottom: 5px solid rgba(90, 175, 255, 0.2);
 	background-color: transparent;
 	animation: loading 1s linear infinite;
 }
